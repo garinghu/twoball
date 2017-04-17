@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #brack{
+            width:1300px;
+            height:700px;
+            background-color:mediumorchid;
+            border-radius: 50px 50px 50px 50px;
+            position: relative;
+        }
+        #ball{
+            width:100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50px 50px 50px 50px;
+            
+        }
+        #ball2{
+            width:100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50px 50px 50px 50px;
+            
+        }
+    </style>
+</head>
+<body>
+<div id="brack">
+  <div id="ball" style="top:300px; left:550px; background-color:aqua;" >  
+  </div>  
+  <div id="ball2" style="top:100px; left:550px; background-color:pink;" >  
+  </div>  
+</div>
+ <script>
+     var ball=document.getElementById('ball');
+	var ball2=document.getElementById('ball2');
+	var flag=false;
+	var flag2=false;
+    var speedtop=-10;
+    var speedleft=-10;
+	var speedtop2=-10;
+	var speedleft2=10;
+	var balltop=parseFloat(ball.offsetTop);
+    var ballleft=parseFloat(ball.offsetLeft);
+	var othertop=parseFloat(ball2.offsetTop);
+    var otherleft=parseFloat(ball2.offsetLeft);
+	 
+	var distance;
+	var dflag=false;
+	
+ball.onclick=function(){
+
+   if(flag==true)
+	   return
+    
+    
+    function go(){
+        flag=true;
+        balltop=parseFloat(ball.offsetTop);
+        ballleft=parseFloat(ball.offsetLeft);
+       
+//        speedtop=speedtop+2;
+//		if(balltop<=10)
+//			balltop=12;
+		
+       if((balltop>=600)||(balltop<=10)){
+           speedtop=-speedtop;
+           
+            
+        }
+		
+        if((ballleft>=1200)||(ballleft<=10)){
+           speedleft=-speedleft;
+           
+            
+       }
+		 if(distance<110&&dflag==false){
+//			balltop=
+			speedtop=-speedtop;
+			speedleft=-speedleft;
+             ball.style.backgroundColor=(ball.style.backgroundColor=='greenyellow'?'aqua':'greenyellow');
+		}
+		if(distance<=110)
+			dflag=true;
+		   else
+			   dflag=false;	
+       distance=parseInt(Math.sqrt(Math.pow((balltop-othertop),2)+Math.pow((ballleft-otherleft),2)));
+       ball.style.top=balltop+speedtop+'px';
+        ball.style.left=ballleft+speedleft+'px';
+       setTimeout(go,10);
+    }
+    go();  
+}
+ball2.onclick=function(){
+	if(flag2==true)
+		return
+	function go2(){
+        flag2=true;
+        othertop=parseFloat(ball2.offsetTop);
+		otherleft=parseFloat(ball2.offsetLeft);
+        
+//        speedtop=speedtop+2;
+//		if(balltop<=10)
+//			balltop=12;
+		
+//		console.log(ball.style.top);
+		if(distance<105&&dflag==false){
+			speedtop2=-speedtop2;
+			speedleft2=-speedleft2;
+           ball2.style.backgroundColor=(ball2.style.backgroundColor=='purple'?'pink':'purple');
+		}	
+       if((othertop>=600)||(othertop<=10)){
+           speedtop2=-speedtop2;
+           
+            
+        }
+		
+        if((otherleft>=1200)||(otherleft<=10)){
+           speedleft2=-speedleft2;
+           
+            
+       }
+       
+       ball2.style.top=othertop+speedtop2+'px';
+        ball2.style.left=otherleft+speedleft2+'px';
+       setTimeout(go2,10);
+    }
+    go2();
+}
+    </script>   
+</body>
+</html>
